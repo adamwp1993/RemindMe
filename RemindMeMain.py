@@ -37,13 +37,15 @@ import os
 
 def init_account():
     """Attempt to retrieve twilio API account info from environmental vars, else set them."""
-    # TODO: Clean up this logic, so instead of being forced to re-set all account info, when a none is found you
-    # will only need to set that specific variable.
     account_sid = input("\n\nPlease enter your Twilio Account SID: ")
     auth_token = input("\n\nPlease enter your Twilio Auth Token: ")
     twilio_bot_num = input("\n\nPlease enter your Twilio Phone number, including Country and Area code: ")
     client = Client(account_sid, auth_token)
+    return client
 
+def init_bot_num():
+    twilio_bot_num = input("\n\nPlease enter your Twilio Phone number, including Country and Area code: ")
+    return twilio_bot_num
 
 def set_account():
     """ Set the Twilio API info as environmental variables. """
@@ -58,6 +60,8 @@ def set_account():
 
 def create_table():
     """Creates a table if it does not exist already in the Database."""
+    # NOTE: if you get a "cannot connect to database" error in SQLite, verify you have write permission to the dir
+    # or use SUDO
     database = sqlite3.connect('remindMeDB', check_same_thread=False, timeout=10)
     cursor = database.cursor()
     cursor.execute('''
@@ -323,9 +327,9 @@ class UserInterface(threading.Thread):
 if __name__ == '__main__':
     global twilio_bot_num
     global client
-    global opening_msg
     display_now = datetime.now()
-    init_account()
+    client = init_account()
+    twilio_bot_num = init_bot_num()
     openingMsg = """
     
      _______                           __                  __  __       __            __ 

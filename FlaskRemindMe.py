@@ -1,6 +1,7 @@
 from flask import Flask, request
 from RemindMeMain import IncomingMessage
 from RemindMeMain import init_account
+from RemindMeMain import init_bot_num
 from twilio.rest import Client
 
 
@@ -10,7 +11,7 @@ from twilio.rest import Client
 global twilio_bot_num
 global client
 
-init_account()
+# client = init_account()
 
 
 app = Flask(__name__)
@@ -42,5 +43,6 @@ def hello():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
+    client = init_account()
+    twilio_bot_num = init_bot_num
 
