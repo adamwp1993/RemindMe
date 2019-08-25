@@ -39,7 +39,6 @@ def init_account():
     """Attempt to retrieve twilio API account info from environmental vars, else set them."""
     account_sid = input("\n\nPlease enter your Twilio Account SID: ")
     auth_token = input("\n\nPlease enter your Twilio Auth Token: ")
-    twilio_bot_num = input("\n\nPlease enter your Twilio Phone number, including Country and Area code: ")
     client = Client(account_sid, auth_token)
     return client
 

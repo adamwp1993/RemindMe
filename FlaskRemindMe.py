@@ -17,7 +17,7 @@ global client
 app = Flask(__name__)
 # ======================================================================================================================
 client = init_account()
-twilio_bot_num = init_bot_num
+twilio_bot_num = init_bot_num()
 
 @app.route("/", methods=['GET', 'POST'])  # allows you to use GET and POST HTTP requests, defines the localhost path
 def sms_receive():
@@ -43,6 +43,6 @@ def hello():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
 
 
