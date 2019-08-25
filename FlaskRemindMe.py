@@ -1,7 +1,6 @@
 from flask import Flask, request
 from RemindMeMain import IncomingMessage
 from RemindMeMain import init_account
-from RemindMeMain import twilio_bot_num
 from twilio.rest import Client
 
 
